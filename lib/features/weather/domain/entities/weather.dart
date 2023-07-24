@@ -3,7 +3,7 @@ part of 'entity.dart';
 @freezed
 class Weather with _$Weather {
   const factory Weather({
-    required String time,
+    DateTime? time,
     required String code,
     required String weather,
     required String humidity,
@@ -12,7 +12,6 @@ class Weather with _$Weather {
   }) = _Weather;
 
   factory Weather.empty() => const Weather(
-        time: '',
         code: '',
         weather: '',
         humidity: '',

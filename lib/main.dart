@@ -4,6 +4,7 @@ import 'package:weather_app/injection.dart';
 import 'package:weather_app/routes/router.dart';
 
 import 'features/weather/presentation/bloc/region_form/region_form_cubit.dart';
+import 'features/weather/presentation/bloc/weather_loader/weather_loader_cubit.dart';
 
 void main() {
   configureDependencies();
@@ -17,8 +18,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final appRoute = AppRouter();
 
-    return BlocProvider(
-      create: (context) => getIt<RegionFormCubit>()..initialized(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<RegionFormCubit>()..initialized(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<WeatherLoaderCubit>(),
+        ),
+      ],
       child: MaterialApp.router(
         routerConfig: appRoute.config(),
         title: 'Weather App',
@@ -26,7 +34,6 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        builder: (context, child) => child!,
       ),
     );
   }

@@ -8,8 +8,8 @@ class WeatherModel with _$WeatherModel {
     @JsonKey(name: 'kodeCuaca') String? code,
     @JsonKey(name: 'cuaca') String? weather,
     String? humidity,
-    String? tempC,
-    String? tempF,
+    @JsonKey(name: 'tempC') String? tempC,
+    @JsonKey(name: 'tempF') String? tempF,
   }) = _WeatherModel;
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) =>
@@ -18,7 +18,7 @@ class WeatherModel with _$WeatherModel {
   Weather toDomain() {
     final empty = Weather.empty();
     return Weather(
-      time: time ?? empty.time,
+      time: DateTime.tryParse(time ?? ''),
       code: code ?? empty.code,
       weather: weather ?? empty.weather,
       humidity: humidity ?? empty.humidity,

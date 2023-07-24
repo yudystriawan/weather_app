@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/features/weather/domain/entities/entity.dart';
 import 'package:weather_app/features/weather/presentation/bloc/region_form/region_form_cubit.dart';
-import 'package:weather_app/features/weather/presentation/bloc/region_loader/region_loader_cubit.dart';
 import 'package:weather_app/features/weather/presentation/bloc/weather_loader/weather_loader_cubit.dart';
 import 'package:weather_app/features/weather/presentation/widgets/region_form_widget.dart';
-import 'package:weather_app/injection.dart';
+import 'package:weather_app/features/weather/presentation/widgets/weather_predictions_widget.dart';
 
 @RoutePage()
-class WeatherPage extends StatelessWidget implements AutoRouteWrapper {
+class WeatherPage extends StatelessWidget {
   const WeatherPage({super.key});
 
   @override
@@ -36,11 +35,21 @@ class WeatherPage extends StatelessWidget implements AutoRouteWrapper {
             }
 
             return const SafeArea(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.all(12),
+              child: Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   children: [
-                    RegionFormWidget(),
+                    Expanded(
+                      flex: 2,
+                      child: RegionFormWidget(),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: WeatherPredictionsWidget(),
+                    ),
                   ],
                 ),
               ),
@@ -48,21 +57,6 @@ class WeatherPage extends StatelessWidget implements AutoRouteWrapper {
           },
         ),
       ),
-    );
-  }
-
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => getIt<RegionLoaderCubit>()..fetched(),
-        ),
-        BlocProvider(
-          create: (context) => getIt<WeatherLoaderCubit>(),
-        ),
-      ],
-      child: this,
     );
   }
 }

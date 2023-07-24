@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
@@ -24,7 +25,19 @@ class WeatherLoaderCubit extends Cubit<WeatherLoaderState> {
 
     emit(failureOrWeathers.fold(
       (f) => WeatherLoaderState.loadFailure(f),
-      (weathers) => WeatherLoaderState.loadSuccess(weathers),
+      (weathers) {
+        // group weathers by date
+        final groupByDate = groupBy(weathers.asList(), (weather) {
+          final weatherTime = weather.time!;
+          return DateTime(
+            weatherTime.year,
+            weatherTime.month,
+            weatherTime.day,
+          );
+        }).toImmutableMap();
+
+        return WeatherLoaderState.loadSuccess(groupByDate);
+      },
     ));
   }
 }
