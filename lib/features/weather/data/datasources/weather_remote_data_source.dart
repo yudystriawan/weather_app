@@ -1,30 +1,70 @@
-import '../../domain/entities/entity.dart';
+import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
+import 'package:weather_app/core/error/failure.dart';
+import 'package:weather_app/core/http_client/weather_client.dart';
+import 'package:weather_app/features/weather/data/models/model.dart';
+
+import '../../../../core/http_client/api_path.dart';
 
 abstract class WeatherRemoteDataSource {
-  Future<List<Region>> getRegions();
-  Future<Region> getRegion({
-    required double lat,
-    required double long,
-  });
-  Future<List<Weather>> getWeathers(String regionId);
+  Future<List<RegionModel>?> getRegions();
+  Future<List<WeatherModel>?> getWeathers(String regionId);
 }
 
+@Injectable(as: WeatherRemoteDataSource)
 class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
+  final WeatherClient _client;
+
+  WeatherRemoteDataSourceImpl(this._client);
+
   @override
-  Future<Region> getRegion({required double lat, required double long}) {
-    // TODO: implement getRegion
-    throw UnimplementedError();
+  Future<List<RegionModel>?> getRegions() async {
+    try {
+      final response = await _client.get('${ApiPath.getWeathers}/wilayah.json');
+
+      if (response.statusCode != 200) {
+        throw Failure.serverError(
+          statusCode: response.statusCode,
+          message: response.statusMessage,
+        );
+      }
+
+      final data = response.data as List;
+      final regions = data.map((e) => RegionModel.fromJson(e)).toList();
+      return regions;
+    } on DioException catch (e) {
+      throw Failure.serverError(
+        statusCode: e.response?.statusCode,
+        message: e.response?.statusMessage,
+      );
+    } catch (e) {
+      throw const Failure.unexpectedError();
+    }
   }
 
   @override
-  Future<List<Region>> getRegions() {
-    // TODO: implement getRegions
-    throw UnimplementedError();
-  }
+  Future<List<WeatherModel>?> getWeathers(String regionId) async {
+    try {
+      final response =
+          await _client.get('${ApiPath.getWeathers}/$regionId.json');
 
-  @override
-  Future<List<Weather>> getWeathers(String regionId) {
-    // TODO: implement getWeathers
-    throw UnimplementedError();
+      if (response.statusCode != 200) {
+        throw Failure.serverError(
+          statusCode: response.statusCode,
+          message: response.statusMessage,
+        );
+      }
+
+      final data = response.data as List;
+      final weathers = data.map((e) => WeatherModel.fromJson(e)).toList();
+      return weathers;
+    } on DioException catch (e) {
+      throw Failure.serverError(
+        statusCode: e.response?.statusCode,
+        message: e.response?.statusMessage,
+      );
+    } catch (e) {
+      throw const Failure.unexpectedError();
+    }
   }
 }

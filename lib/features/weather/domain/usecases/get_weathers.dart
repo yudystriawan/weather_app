@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:weather_app/core/error/failure.dart';
 import 'package:weather_app/core/usecases/usecase.dart';
@@ -18,6 +19,7 @@ class Params extends Equatable {
   List<Object?> get props => [regionId];
 }
 
+@injectable
 class GetWeathers implements Usecase<KtList<Weather>, Params> {
   final WeatherRepository _repository;
 
