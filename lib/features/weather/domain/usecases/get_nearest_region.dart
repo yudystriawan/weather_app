@@ -85,7 +85,7 @@ class GetNearestRegion implements Usecase<Region, Params> {
   Region? _selectNearestCoordinate({
     required LatLng referencePoint,
     required List<Region> regions,
-    double maxDistanceInKm = 1,
+    double maxDistanceInKm = 10,
   }) {
     Region? nearestRegion;
     double nearestDistance = double.infinity;

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
@@ -26,6 +28,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
     } on Failure catch (e) {
       return left(e);
     } catch (e) {
+      log('an error occured', error: e, name: runtimeType.toString());
       return left(const Failure.unexpectedError());
     }
   }
@@ -43,6 +46,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
     } on Failure catch (e) {
       return left(e);
     } catch (e) {
+      log('an error occured', error: e, name: runtimeType.toString());
       return left(const Failure.unexpectedError());
     }
   }

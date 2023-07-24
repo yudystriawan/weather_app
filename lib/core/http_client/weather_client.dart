@@ -3,5 +3,5 @@ import 'package:weather_app/core/http_client/base_http_client.dart';
 
 @lazySingleton
 class WeatherClient extends BaseHttpClient {
-  WeatherClient() : super('https://ibnux.github.io/BMKG-importer');
+  WeatherClient() : super(baseUrl: 'https://ibnux.github.io/BMKG-importer');
 }

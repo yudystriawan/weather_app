@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:weather_app/core/error/failure.dart';
@@ -33,11 +35,13 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
       final regions = data.map((e) => RegionModel.fromJson(e)).toList();
       return regions;
     } on DioException catch (e) {
+      log('getRegions server error', error: e, name: runtimeType.toString());
       throw Failure.serverError(
         statusCode: e.response?.statusCode,
         message: e.response?.statusMessage,
       );
     } catch (e) {
+      log('getRegions', error: e, name: runtimeType.toString());
       throw const Failure.unexpectedError();
     }
   }
@@ -59,11 +63,13 @@ class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
       final weathers = data.map((e) => WeatherModel.fromJson(e)).toList();
       return weathers;
     } on DioException catch (e) {
+      log('getWeathers', error: e, name: runtimeType.toString());
       throw Failure.serverError(
         statusCode: e.response?.statusCode,
         message: e.response?.statusMessage,
       );
     } catch (e) {
+      log('getWeathers', error: e, name: runtimeType.toString());
       throw const Failure.unexpectedError();
     }
   }
