@@ -5,6 +5,7 @@ import 'package:weather_app/features/weather/domain/entities/entity.dart';
 import 'package:weather_app/features/weather/presentation/bloc/region_form/region_form_cubit.dart';
 import 'package:weather_app/features/weather/presentation/bloc/region_loader/region_loader_cubit.dart';
 import 'package:weather_app/features/weather/presentation/bloc/weather_loader/weather_loader_cubit.dart';
+import 'package:weather_app/features/weather/presentation/widgets/region_form_widget.dart';
 import 'package:weather_app/injection.dart';
 
 @RoutePage()
@@ -34,13 +35,12 @@ class WeatherPage extends StatelessWidget implements AutoRouteWrapper {
               );
             }
 
-            final region = state.selectedRegion;
-            return SafeArea(
+            return const SafeArea(
               child: SingleChildScrollView(
+                padding: EdgeInsets.all(12),
                 child: Column(
                   children: [
-                    Text(region.province),
-                    Text(region.city),
+                    RegionFormWidget(),
                   ],
                 ),
               ),
