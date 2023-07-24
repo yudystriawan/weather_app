@@ -9,4 +9,5 @@ class Failure with _$Failure {
     String? message,
   }) = _ServerError;
   const factory Failure.unexpectedError() = _UnexpectedError;
+  const factory Failure.permissionIsRequired() = _PermissionIsRequired;
 }
