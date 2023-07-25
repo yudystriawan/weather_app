@@ -9,20 +9,20 @@ import '../../../domain/entities/entity.dart';
 import '../../../domain/usecases/get_nearest_region.dart' as ng;
 import '../../../domain/usecases/get_weather.dart' as w;
 
-part 'region_form_cubit.freezed.dart';
-part 'region_form_state.dart';
+part 'current_location_state.dart';
+part 'current_location_cubit.freezed.dart';
 
 @injectable
-class RegionFormCubit extends Cubit<RegionFormState> {
+class CurrentLocationCubit extends Cubit<CurrentLocationState> {
   final ng.GetNearestRegion _getNearestRegion;
   final GetCurrentPosition _getCurrentPosition;
   final w.GetWeather _getWeather;
 
-  RegionFormCubit(
+  CurrentLocationCubit(
     this._getNearestRegion,
     this._getCurrentPosition,
     this._getWeather,
-  ) : super(RegionFormState.initial());
+  ) : super(CurrentLocationState.initial());
 
   Future<void> initialized({
     double? latitude,
@@ -63,7 +63,7 @@ class RegionFormCubit extends Cubit<RegionFormState> {
     initialized(latitude: region.latitude, longitude: region.longitude);
   }
 
-  Future<RegionFormState> _getDataToState({
+  Future<CurrentLocationState> _getDataToState({
     required double latitude,
     required double longitude,
   }) async {

@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/features/weather/domain/entities/entity.dart';
-import 'package:weather_app/features/weather/presentation/bloc/region_form/region_form_cubit.dart';
 import 'package:weather_app/features/weather/presentation/bloc/weather_loader/weather_loader_cubit.dart';
 import 'package:weather_app/features/weather/presentation/widgets/region_form_widget.dart';
 import 'package:weather_app/features/weather/presentation/widgets/weather_predictions_widget.dart';
 
+import '../bloc/current_location/current_location_cubit.dart';
 import '../widgets/weather_info_widget.dart';
 
 @RoutePage()
@@ -16,7 +16,7 @@ class WeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocListener<RegionFormCubit, RegionFormState>(
+      body: BlocListener<CurrentLocationCubit, CurrentLocationState>(
         listener: (context, state) {
           final region = state.currentRegion;
           if (region != Region.empty()) {
@@ -27,7 +27,7 @@ class WeatherPage extends StatelessWidget {
             debugPrint('an error occured:  ${state.failure}');
           }
         },
-        child: BlocBuilder<RegionFormCubit, RegionFormState>(
+        child: BlocBuilder<CurrentLocationCubit, CurrentLocationState>(
           buildWhen: (p, c) => p.isLoading != c.isLoading,
           builder: (context, state) {
             if (state.isLoading) {

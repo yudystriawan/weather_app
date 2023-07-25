@@ -3,15 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/core/styles/typography/text_style.dart';
 import 'package:weather_app/core/utils/date_formatter.dart';
 import 'package:weather_app/core/utils/temperature_formatter.dart';
-import 'package:weather_app/features/weather/presentation/bloc/region_form/region_form_cubit.dart';
 import 'package:weather_app/features/weather/presentation/widgets/weather_image.dart';
+
+import '../bloc/current_location/current_location_cubit.dart';
 
 class WeatherInfoWidget extends StatelessWidget {
   const WeatherInfoWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RegionFormCubit, RegionFormState>(
+    return BlocBuilder<CurrentLocationCubit, CurrentLocationState>(
       buildWhen: (p, c) => p.currentWeather != c.currentWeather,
       builder: (context, state) {
         final weather = state.currentWeather;

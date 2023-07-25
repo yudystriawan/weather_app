@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/features/weather/presentation/bloc/current_location/current_location_cubit.dart';
 import 'package:weather_app/injection.dart';
 import 'package:weather_app/routes/router.dart';
 
-import 'features/weather/presentation/bloc/region_form/region_form_cubit.dart';
 import 'features/weather/presentation/bloc/weather_loader/weather_loader_cubit.dart';
 
 void main() {
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt<RegionFormCubit>()..initialized(),
+          create: (context) => getIt<CurrentLocationCubit>()..initialized(),
         ),
         BlocProvider(
           create: (context) => getIt<WeatherLoaderCubit>(),

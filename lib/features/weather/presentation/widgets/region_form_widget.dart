@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/core/styles/typography/text_style.dart';
-import 'package:weather_app/features/weather/presentation/bloc/region_form/region_form_cubit.dart';
 import 'package:weather_app/features/weather/presentation/widgets/regions_bottom_sheet.dart';
+
+import '../bloc/current_location/current_location_cubit.dart';
 
 class RegionFormWidget extends StatelessWidget {
   const RegionFormWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RegionFormCubit, RegionFormState>(
+    return BlocBuilder<CurrentLocationCubit, CurrentLocationState>(
       buildWhen: (p, c) => p.currentRegion != c.currentRegion,
       builder: (context, state) {
         final region = state.currentRegion;
@@ -19,7 +20,7 @@ class RegionFormWidget extends StatelessWidget {
               behavior: HitTestBehavior.opaque,
               onTap: () => showRegionBottomSheet(context).then((region) {
                 if (region == null) return;
-                context.read<RegionFormCubit>().regionChanged(region);
+                context.read<CurrentLocationCubit>().regionChanged(region);
               }),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

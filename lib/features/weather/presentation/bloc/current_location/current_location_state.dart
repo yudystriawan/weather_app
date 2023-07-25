@@ -1,18 +1,18 @@
-part of 'region_form_cubit.dart';
+part of 'current_location_cubit.dart';
 
 @freezed
 @freezed
-class RegionFormState with _$RegionFormState {
-  const factory RegionFormState({
+class CurrentLocationState with _$CurrentLocationState {
+  const factory CurrentLocationState({
     required Region currentRegion,
     required Weather currentWeather,
     required double currentLat,
     required double currentLng,
     Failure? failure,
     @Default(false) bool isLoading,
-  }) = _RegionFormState;
+  }) = _CurrentLocationState;
 
-  factory RegionFormState.initial() => RegionFormState(
+  factory CurrentLocationState.initial() => CurrentLocationState(
         currentRegion: Region.empty(),
         currentLat: 0.0,
         currentLng: 0.0,
