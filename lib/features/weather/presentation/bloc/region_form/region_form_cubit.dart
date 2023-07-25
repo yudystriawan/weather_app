@@ -81,7 +81,7 @@ class RegionFormCubit extends Cubit<RegionFormState> {
     return await failureOrRegion.fold(
       (f) async => newState.copyWith(failure: f),
       (region) async {
-        // get weathers
+        // get weather
         final failureOrWeather = await _getWeather(w.Params(region.id));
 
         return failureOrWeather.fold(
