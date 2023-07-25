@@ -57,24 +57,6 @@ class WeatherPage extends StatelessWidget {
                 ),
               ),
             );
-            return const SafeArea(
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    RegionFormWidget(),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    WeatherInfoWidget(),
-                    Expanded(
-                      flex: 1,
-                      child: WeatherPredictionsWidget(),
-                    ),
-                  ],
-                ),
-              ),
-            );
           },
         ),
       ),

@@ -32,7 +32,7 @@ class WeatherInfoWidget extends StatelessWidget {
               height: 4,
             ),
             Text(
-              weather.weather,
+              weather.weather.isEmpty ? '-' : weather.weather,
               style: AppTextStyle.headline6,
             ),
             WeatherImage(weather: weather),
