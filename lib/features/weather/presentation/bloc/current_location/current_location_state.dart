@@ -10,6 +10,7 @@ class CurrentLocationState with _$CurrentLocationState {
     required double currentLng,
     Failure? failure,
     @Default(false) bool isLoading,
+    @Default(Temperature.celcius) Temperature degree,
   }) = _CurrentLocationState;
 
   factory CurrentLocationState.initial() => CurrentLocationState(

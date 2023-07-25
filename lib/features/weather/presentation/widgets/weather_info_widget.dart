@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/core/styles/typography/text_style.dart';
 import 'package:weather_app/core/utils/date_formatter.dart';
 import 'package:weather_app/features/weather/presentation/widgets/weather_image.dart';
+import 'package:weather_app/features/weather/presentation/widgets/weather_temp_info_widget.dart';
 
 import '../bloc/current_location/current_location_cubit.dart';
 
@@ -17,8 +18,7 @@ class WeatherInfoWidget extends StatelessWidget {
         final weather = state.currentWeather;
         return Column(
           children: [
-            Text(
-              weather.getTemp(),
+            WeatherTempInfoWidget(
               style: AppTextStyle.headline1,
             ),
             const SizedBox(

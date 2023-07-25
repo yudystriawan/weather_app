@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/core/styles/typography/text_style.dart';
 import 'package:weather_app/core/utils/date_formatter.dart';
 import 'package:weather_app/features/weather/presentation/widgets/weather_image.dart';
+import 'package:weather_app/features/weather/presentation/widgets/weather_temp_info_widget.dart';
 
 import '../bloc/weather_loader/weather_loader_cubit.dart';
 
@@ -83,10 +84,9 @@ class WeatherPredictionsWidget extends StatelessWidget {
                                       const SizedBox(
                                         height: 16,
                                       ),
-                                      Text(
-                                        weather.getTemp(),
+                                      WeatherTempInfoWidget(
                                         style: AppTextStyle.headline6.bold,
-                                      ),
+                                      )
                                     ],
                                   ),
                                 );

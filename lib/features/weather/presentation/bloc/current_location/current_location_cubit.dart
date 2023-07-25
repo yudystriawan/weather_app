@@ -3,14 +3,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:weather_app/core/usecases/get_current_position.dart';
 import 'package:weather_app/core/usecases/usecase.dart';
+import 'package:weather_app/core/utils/temperature_formatter.dart';
 
 import '../../../../../core/error/failure.dart';
 import '../../../domain/entities/entity.dart';
 import '../../../domain/usecases/get_nearest_region.dart' as ng;
 import '../../../domain/usecases/get_weather.dart' as w;
 
-part 'current_location_state.dart';
 part 'current_location_cubit.freezed.dart';
+part 'current_location_state.dart';
 
 @injectable
 class CurrentLocationCubit extends Cubit<CurrentLocationState> {
@@ -61,6 +62,13 @@ class CurrentLocationCubit extends Cubit<CurrentLocationState> {
       currentRegion: region,
     ));
     initialized(latitude: region.latitude, longitude: region.longitude);
+  }
+
+  void tempDegreeChanged(Temperature degree) {
+    if (degree != state.degree) {
+      emit(state.copyWith(degree: degree));
+      return;
+    }
   }
 
   Future<CurrentLocationState> _getDataToState({
