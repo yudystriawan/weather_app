@@ -2,6 +2,7 @@ part of 'entity.dart';
 
 @freezed
 class Weather with _$Weather {
+  const Weather._();
   const factory Weather({
     DateTime? time,
     required String code,
@@ -18,4 +19,11 @@ class Weather with _$Weather {
         tempC: 0.0,
         tempF: 0.0,
       );
+
+  String getTemp({Temperature degree = Temperature.celcius}) {
+    double value = tempC;
+    if (degree == Temperature.fahreinheit) value = tempF;
+
+    return value.toDegreeFormatted(degree: degree);
+  }
 }
