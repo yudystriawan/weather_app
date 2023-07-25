@@ -5,8 +5,8 @@ import 'package:weather_app/features/weather/presentation/widgets/regions_bottom
 
 import '../bloc/current_location/current_location_cubit.dart';
 
-class RegionFormWidget extends StatelessWidget {
-  const RegionFormWidget({super.key});
+class RegionInfoWidget extends StatelessWidget {
+  const RegionInfoWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

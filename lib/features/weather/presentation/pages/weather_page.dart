@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/features/weather/domain/entities/entity.dart';
 import 'package:weather_app/features/weather/presentation/bloc/weather_loader/weather_loader_cubit.dart';
-import 'package:weather_app/features/weather/presentation/widgets/region_form_widget.dart';
+import 'package:weather_app/features/weather/presentation/widgets/region_info_widget.dart';
 import 'package:weather_app/features/weather/presentation/widgets/weather_predictions_widget.dart';
 
 import '../bloc/current_location/current_location_cubit.dart';
@@ -44,7 +44,7 @@ class WeatherPage extends StatelessWidget {
                     const SliverToBoxAdapter(
                       child: Column(
                         children: [
-                          RegionFormWidget(),
+                          RegionInfoWidget(),
                           SizedBox(
                             height: 16,
                           ),
