@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:kt_dart/collection.dart';
+import 'package:weather_app/core/styles/typography/text_style.dart';
 import 'package:weather_app/features/weather/presentation/bloc/region_loader/region_loader_cubit.dart';
 import 'package:weather_app/injection.dart';
 
@@ -11,6 +12,12 @@ import '../../domain/entities/entity.dart';
 Future<Region?> showRegionBottomSheet(BuildContext context) {
   return showModalBottomSheet<Region?>(
     context: context,
+    isScrollControlled: true,
+    constraints: BoxConstraints(
+      maxHeight: MediaQuery.of(context).size.height -
+          MediaQueryData.fromView(View.of(context)).padding.top -
+          kToolbarHeight,
+    ),
     builder: (context) => const _RegionsBottomSheet(),
   );
 }
@@ -63,7 +70,7 @@ class _RegionsBottomSheet extends HookWidget {
                         itemCount: regions.size,
                         separatorBuilder: (BuildContext context, int index) {
                           return const SizedBox(
-                            height: 8,
+                            height: 16,
                           );
                         },
                         itemBuilder: (BuildContext context, int index) {
@@ -71,7 +78,10 @@ class _RegionsBottomSheet extends HookWidget {
                           return GestureDetector(
                             behavior: HitTestBehavior.opaque,
                             onTap: () => context.router.pop(region),
-                            child: Text(region.formattedAddress),
+                            child: Text(
+                              region.formattedAddress,
+                              style: AppTextStyle.bodyText1,
+                            ),
                           );
                         },
                       ),
