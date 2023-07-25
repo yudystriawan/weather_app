@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:weather_app/core/styles/typography/text_style.dart';
+import 'package:weather_app/features/weather/presentation/bloc/current_location/current_location_cubit.dart';
 import 'package:weather_app/features/weather/presentation/bloc/region_loader/region_loader_cubit.dart';
 import 'package:weather_app/injection.dart';
 
@@ -85,7 +86,36 @@ class _RegionsBottomSheet extends HookWidget {
                           );
                         },
                       ),
-                    )
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () {
+                        context.read<CurrentLocationCubit>().initialized();
+                        context.router.pop();
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 16,
+                          horizontal: 8,
+                        ),
+                        decoration: ShapeDecoration(
+                          shape: const StadiumBorder(),
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Use My Location.',
+                            style: AppTextStyle.bodyText1.bold
+                                .copyWith(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).padding.bottom),
                   ],
                 ),
               );
