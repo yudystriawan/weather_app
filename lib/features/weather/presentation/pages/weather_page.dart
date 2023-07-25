@@ -36,6 +36,27 @@ class WeatherPage extends StatelessWidget {
               );
             }
 
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: NestedScrollView(
+                  headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                    const SliverToBoxAdapter(
+                      child: Column(
+                        children: [
+                          RegionFormWidget(),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          WeatherInfoWidget(),
+                        ],
+                      ),
+                    )
+                  ],
+                  body: const WeatherPredictionsWidget(),
+                ),
+              ),
+            );
             return const SafeArea(
               child: Padding(
                 padding: EdgeInsets.all(16),

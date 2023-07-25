@@ -64,31 +64,34 @@ class WeatherPredictionsWidget extends StatelessWidget {
                               },
                               itemBuilder: (BuildContext context, int index) {
                                 final weather = weatherList[index];
-                                return Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      weather.time!.toDateFormatted('HH:mm'),
-                                      style: AppTextStyle.bodyText1.bold,
-                                    ),
-                                    const SizedBox(
-                                      height: 16,
-                                    ),
-                                    WeatherImage(
-                                      weather: weather,
-                                      size: 48,
-                                    ),
-                                    const SizedBox(
-                                      height: 16,
-                                    ),
-                                    Text(
-                                      weather.tempC.toDegreeFormatted(
-                                        degree: Temperature.celcius,
+                                return SingleChildScrollView(
+                                  physics: const ClampingScrollPhysics(),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        weather.time!.toDateFormatted('HH:mm'),
+                                        style: AppTextStyle.bodyText1.bold,
                                       ),
-                                      style: AppTextStyle.headline6.bold,
-                                    ),
-                                  ],
+                                      const SizedBox(
+                                        height: 16,
+                                      ),
+                                      WeatherImage(
+                                        weather: weather,
+                                        size: 48,
+                                      ),
+                                      const SizedBox(
+                                        height: 16,
+                                      ),
+                                      Text(
+                                        weather.tempC.toDegreeFormatted(
+                                          degree: Temperature.celcius,
+                                        ),
+                                        style: AppTextStyle.headline6.bold,
+                                      ),
+                                    ],
+                                  ),
                                 );
                               },
                             ),
