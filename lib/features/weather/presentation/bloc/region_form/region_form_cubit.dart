@@ -60,6 +60,7 @@ class RegionFormCubit extends Cubit<RegionFormState> {
       failure: null,
       currentRegion: region,
     ));
+    initialized(latitude: region.latitude, longitude: region.longitude);
   }
 
   Future<RegionFormState> _getDataToState({
