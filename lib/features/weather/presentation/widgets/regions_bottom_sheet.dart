@@ -59,8 +59,15 @@ class _RegionsBottomSheet extends HookWidget {
                 child: Column(
                   children: [
                     TextField(
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'Search...',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(50.r),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 10.w,
+                          vertical: 10.w,
+                        ),
                       ),
                       onChanged: (value) => query.value = value,
                     ),
@@ -71,7 +78,7 @@ class _RegionsBottomSheet extends HookWidget {
                       child: ListView.separated(
                         itemCount: regions.size,
                         separatorBuilder: (BuildContext context, int index) {
-                          return SizedBox(
+                          return Divider(
                             height: 16.w,
                           );
                         },
