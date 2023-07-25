@@ -16,7 +16,7 @@ class WeatherPage extends StatelessWidget {
     return Scaffold(
       body: BlocListener<RegionFormCubit, RegionFormState>(
         listener: (context, state) {
-          final region = state.selectedRegion;
+          final region = state.currentRegion;
           if (region != Region.empty()) {
             context.read<WeatherLoaderCubit>().fetched(region.id);
           }

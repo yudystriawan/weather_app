@@ -4,7 +4,8 @@ part of 'region_form_cubit.dart';
 @freezed
 class RegionFormState with _$RegionFormState {
   const factory RegionFormState({
-    required Region selectedRegion,
+    required Region currentRegion,
+    required Weather currentWeather,
     required double currentLat,
     required double currentLng,
     Failure? failure,
@@ -12,8 +13,9 @@ class RegionFormState with _$RegionFormState {
   }) = _RegionFormState;
 
   factory RegionFormState.initial() => RegionFormState(
-        selectedRegion: Region.empty(),
+        currentRegion: Region.empty(),
         currentLat: 0.0,
         currentLng: 0.0,
+        currentWeather: Weather.empty(),
       );
 }

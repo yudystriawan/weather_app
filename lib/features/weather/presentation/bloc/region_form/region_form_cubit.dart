@@ -42,9 +42,9 @@ class RegionFormCubit extends Cubit<RegionFormState> {
         return failureOrRegion.fold(
           (f) => newState.copyWith(failure: f),
           (region) => newState.copyWith(
-            selectedRegion: region,
-            currentLat: position.latitude,
-            currentLng: position.longitude,
+            currentRegion: region,
+            currentLat: region.latitude,
+            currentLng: region.longitude,
           ),
         );
       },
@@ -52,6 +52,6 @@ class RegionFormCubit extends Cubit<RegionFormState> {
   }
 
   Future<void> regionChanged(Region region) async {
-    emit(state.copyWith(failure: null, selectedRegion: region));
+    emit(state.copyWith(failure: null, currentRegion: region));
   }
 }

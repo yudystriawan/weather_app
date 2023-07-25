@@ -10,9 +10,9 @@ class RegionFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RegionFormCubit, RegionFormState>(
-      buildWhen: (p, c) => p.selectedRegion != c.selectedRegion,
+      buildWhen: (p, c) => p.currentRegion != c.currentRegion,
       builder: (context, state) {
-        final region = state.selectedRegion;
+        final region = state.currentRegion;
         return Column(
           children: [
             GestureDetector(
