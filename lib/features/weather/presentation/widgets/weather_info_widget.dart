@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/core/styles/typography/text_style.dart';
 import 'package:weather_app/core/utils/date_formatter.dart';
 import 'package:weather_app/features/weather/presentation/widgets/weather_image.dart';
@@ -21,15 +22,15 @@ class WeatherInfoWidget extends StatelessWidget {
             WeatherTempInfoWidget(
               style: AppTextStyle.headline1,
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.w,
             ),
             Text(
               DateTime.now().toDateFormatted('EEEE, dd MMM hh:mm'),
               style: AppTextStyle.bodyText1,
             ),
-            const SizedBox(
-              height: 4,
+            SizedBox(
+              height: 4.w,
             ),
             Text(
               weather.weather.isEmpty ? '-' : weather.weather,

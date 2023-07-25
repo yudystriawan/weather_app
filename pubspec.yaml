@@ -25,6 +25,7 @@ dependencies:
   auto_route: ^7.7.1
   flutter_hooks: ^0.19.0
   intl: ^0.18.1
+  flutter_screenutil: ^5.8.4
 
 dev_dependencies:
   flutter_test:

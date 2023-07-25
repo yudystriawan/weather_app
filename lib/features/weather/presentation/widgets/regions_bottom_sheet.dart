@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:weather_app/core/styles/typography/text_style.dart';
 import 'package:weather_app/features/weather/presentation/bloc/current_location/current_location_cubit.dart';
@@ -54,7 +55,7 @@ class _RegionsBottomSheet extends HookWidget {
               }
 
               return Container(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12.w),
                 child: Column(
                   children: [
                     TextField(
@@ -63,15 +64,15 @@ class _RegionsBottomSheet extends HookWidget {
                       ),
                       onChanged: (value) => query.value = value,
                     ),
-                    const SizedBox(
-                      height: 16,
+                    SizedBox(
+                      height: 16.w,
                     ),
                     Expanded(
                       child: ListView.separated(
                         itemCount: regions.size,
                         separatorBuilder: (BuildContext context, int index) {
-                          return const SizedBox(
-                            height: 16,
+                          return SizedBox(
+                            height: 16.w,
                           );
                         },
                         itemBuilder: (BuildContext context, int index) {
@@ -87,8 +88,8 @@ class _RegionsBottomSheet extends HookWidget {
                         },
                       ),
                     ),
-                    const SizedBox(
-                      height: 8,
+                    SizedBox(
+                      height: 8.w,
                     ),
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
@@ -98,9 +99,9 @@ class _RegionsBottomSheet extends HookWidget {
                       },
                       child: Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 16,
-                          horizontal: 8,
+                        padding: EdgeInsets.symmetric(
+                          vertical: 16.w,
+                          horizontal: 8.w,
                         ),
                         decoration: ShapeDecoration(
                           shape: const StadiumBorder(),

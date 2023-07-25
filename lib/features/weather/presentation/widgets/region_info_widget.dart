@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/core/styles/typography/text_style.dart';
 import 'package:weather_app/features/weather/presentation/widgets/regions_bottom_sheet.dart';
 import 'package:weather_app/features/weather/presentation/widgets/weather_option_widget.dart';
@@ -37,18 +38,18 @@ class RegionInfoWidget extends StatelessWidget {
                           region.province,
                           style: AppTextStyle.headline5.bold,
                         ),
-                        const SizedBox(
-                          width: 8,
+                        SizedBox(
+                          width: 8.w,
                         ),
-                        const Icon(
+                        Icon(
                           Icons.keyboard_arrow_down,
-                          size: 28,
+                          size: 28.w,
                         )
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 8,
+                  SizedBox(
+                    height: 8.w,
                   ),
                   Text(
                     region.city,
@@ -57,10 +58,10 @@ class RegionInfoWidget extends StatelessWidget {
                 ],
               ),
             ),
-            const Positioned(
-              top: 0,
-              right: 0,
-              child: WeatherOptionWidget(),
+            Positioned(
+              top: 0.w,
+              right: 0.w,
+              child: const WeatherOptionWidget(),
             ),
           ],
         );

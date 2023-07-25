@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/core/styles/typography/text_style.dart';
 import 'package:weather_app/core/utils/date_formatter.dart';
 import 'package:weather_app/features/weather/presentation/widgets/weather_image.dart';
@@ -33,7 +34,7 @@ class WeatherPredictionsWidget extends StatelessWidget {
                     isScrollable: true,
                     physics: const NeverScrollableScrollPhysics(),
                     labelStyle: AppTextStyle.bodyText1.bold,
-                    labelPadding: const EdgeInsets.only(right: 12),
+                    labelPadding: EdgeInsets.only(right: 12.w),
                     tabs: weathersMap.keys
                         .asSet()
                         .map(
@@ -43,8 +44,8 @@ class WeatherPredictionsWidget extends StatelessWidget {
                         )
                         .toList(),
                   ),
-                  const SizedBox(
-                    height: 16,
+                  SizedBox(
+                    height: 16.w,
                   ),
                   Expanded(
                     child: TabBarView(
@@ -58,8 +59,8 @@ class WeatherPredictionsWidget extends StatelessWidget {
                               itemCount: weatherList.length,
                               separatorBuilder:
                                   (BuildContext context, int index) {
-                                return const SizedBox(
-                                  width: 48,
+                                return SizedBox(
+                                  width: 36.w,
                                 );
                               },
                               itemBuilder: (BuildContext context, int index) {
@@ -74,12 +75,12 @@ class WeatherPredictionsWidget extends StatelessWidget {
                                         weather.time!.toDateFormatted('HH:mm'),
                                         style: AppTextStyle.bodyText1.bold,
                                       ),
-                                      const SizedBox(
-                                        height: 16,
+                                      SizedBox(
+                                        height: 16.w,
                                       ),
                                       WeatherImage(
                                         weather: weather,
-                                        size: 48,
+                                        size: 48.w,
                                       ),
                                       const SizedBox(
                                         height: 16,

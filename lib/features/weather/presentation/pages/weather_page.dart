@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/features/weather/domain/entities/entity.dart';
 import 'package:weather_app/features/weather/presentation/bloc/weather_loader/weather_loader_cubit.dart';
 import 'package:weather_app/features/weather/presentation/widgets/region_info_widget.dart';
@@ -38,17 +39,17 @@ class WeatherPage extends StatelessWidget {
 
             return SafeArea(
               child: Padding(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12.w),
                 child: NestedScrollView(
                   headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                    const SliverToBoxAdapter(
+                    SliverToBoxAdapter(
                       child: Column(
                         children: [
-                          RegionInfoWidget(),
+                          const RegionInfoWidget(),
                           SizedBox(
-                            height: 16,
+                            height: 16.w,
                           ),
-                          WeatherInfoWidget(),
+                          const WeatherInfoWidget(),
                         ],
                       ),
                     )
