@@ -7,6 +7,8 @@ import 'package:weather_app/features/weather/presentation/bloc/weather_loader/we
 import 'package:weather_app/features/weather/presentation/widgets/region_form_widget.dart';
 import 'package:weather_app/features/weather/presentation/widgets/weather_predictions_widget.dart';
 
+import '../widgets/weather_info_widget.dart';
+
 @RoutePage()
 class WeatherPage extends StatelessWidget {
   const WeatherPage({super.key});
@@ -39,13 +41,11 @@ class WeatherPage extends StatelessWidget {
                 padding: EdgeInsets.all(16),
                 child: Column(
                   children: [
-                    Expanded(
-                      flex: 2,
-                      child: RegionFormWidget(),
-                    ),
+                    RegionFormWidget(),
                     SizedBox(
                       height: 16,
                     ),
+                    WeatherInfoWidget(),
                     Expanded(
                       flex: 1,
                       child: WeatherPredictionsWidget(),

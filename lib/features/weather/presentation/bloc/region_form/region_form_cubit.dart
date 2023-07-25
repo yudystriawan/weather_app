@@ -3,29 +3,43 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:weather_app/core/usecases/get_current_position.dart';
 import 'package:weather_app/core/usecases/usecase.dart';
-import 'package:weather_app/features/weather/domain/usecases/get_nearest_region.dart';
 
 import '../../../../../core/error/failure.dart';
 import '../../../domain/entities/entity.dart';
+import '../../../domain/usecases/get_nearest_region.dart' as ng;
+import '../../../domain/usecases/get_weather.dart' as w;
 
 part 'region_form_cubit.freezed.dart';
 part 'region_form_state.dart';
 
 @injectable
 class RegionFormCubit extends Cubit<RegionFormState> {
-  final GetNearestRegion _getNearestRegion;
+  final ng.GetNearestRegion _getNearestRegion;
   final GetCurrentPosition _getCurrentPosition;
+  final w.GetWeather _getWeather;
 
   RegionFormCubit(
     this._getNearestRegion,
     this._getCurrentPosition,
+    this._getWeather,
   ) : super(RegionFormState.initial());
 
-  Future<void> initialized() async {
+  Future<void> initialized({
+    double? latitude,
+    double? longitude,
+  }) async {
     emit(state.copyWith(
       isLoading: true,
       failure: null,
     ));
+
+    if (latitude != null && longitude != null) {
+      emit(await _getDataToState(
+        latitude: latitude,
+        longitude: longitude,
+      ));
+      return;
+    }
 
     final failureOrPosition = await _getCurrentPosition(const NoParams());
     final newState = state.copyWith(isLoading: false);
@@ -33,25 +47,52 @@ class RegionFormCubit extends Cubit<RegionFormState> {
     emit(await failureOrPosition.fold(
       (f) async => newState.copyWith(failure: f),
       (position) async {
-        final failureOrRegion = await _getNearestRegion(Params(
-            referencePoint: LatLng(
+        return await _getDataToState(
           latitude: position.latitude,
           longitude: position.longitude,
-        )));
-
-        return failureOrRegion.fold(
-          (f) => newState.copyWith(failure: f),
-          (region) => newState.copyWith(
-            currentRegion: region,
-            currentLat: region.latitude,
-            currentLng: region.longitude,
-          ),
         );
       },
     ));
   }
 
   Future<void> regionChanged(Region region) async {
-    emit(state.copyWith(failure: null, currentRegion: region));
+    emit(state.copyWith(
+      failure: null,
+      currentRegion: region,
+    ));
+  }
+
+  Future<RegionFormState> _getDataToState({
+    required double latitude,
+    required double longitude,
+  }) async {
+    final latLng = ng.LatLng(
+      latitude: latitude,
+      longitude: longitude,
+    );
+
+    final failureOrRegion = await _getNearestRegion(
+      ng.Params(referencePoint: latLng),
+    );
+
+    final newState = state.copyWith(isLoading: false);
+
+    return await failureOrRegion.fold(
+      (f) async => newState.copyWith(failure: f),
+      (region) async {
+        // get weathers
+        final failureOrWeather = await _getWeather(w.Params(region.id));
+
+        return failureOrWeather.fold(
+          (f) => newState.copyWith(failure: f),
+          (weather) => newState.copyWith(
+            currentRegion: region,
+            currentWeather: weather,
+            currentLat: region.latitude,
+            currentLng: region.longitude,
+          ),
+        );
+      },
+    );
   }
 }

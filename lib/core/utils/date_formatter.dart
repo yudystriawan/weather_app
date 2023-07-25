@@ -9,6 +9,7 @@ extension StringX on String {
 }
 
 extension DateTimeX on DateTime {
+  /// default format dd MMM yyyy
   String toDateFormatted([String? format]) {
     final date = this;
     final formatted = DateFormat(format ?? 'dd MMM yyyy');
